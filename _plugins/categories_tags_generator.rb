@@ -8,20 +8,13 @@
 module Jekyll
  class TagsGenerator < Generator
 
-   def generate(site)
-       tags_dir = Dir.pwd + '/tags'
 
-
-    puts "current dir #{ Dir.pwd }"
+   def do_copying(mcp_dir, dest_folder)
 
     regenerate_flag = false
 
-
-    mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
-    dest_folder = Dir.pwd + '/public/download/mcp-2.0/'
-
     if !Dir.exists?(dest_folder)
-      puts "Creating dir #{dest_folder}"
+      puts "Creating dest dir #{dest_folder}"
       Dir.mkdir(dest_folder)
     end
 
@@ -29,22 +22,32 @@ module Jekyll
  
       i = File.basename f
  
-      # don't understand this... code looks wrong...
       puts "file #{ i }"
       if !File.exists?(dest_folder + '/' + i)
-        puts "copying #{ f} -> #{dest_folder}"
+        puts "copying to #{dest_folder}"
         FileUtils.cp(f, dest_folder) 
         regenerate_flag = true
       end
     end
 
-
     # trigger regeneration
     if regenerate_flag
       FileUtils.touch Dir.pwd+'/_config.yml'
     end
+   end
+
+
+
+   def generate(site)
+
+    puts "current dir #{ Dir.pwd }"
+
+    mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
+    dest_folder = Dir.pwd + '/public/download/mcp-2.0/'
+    do_copying(mcp_dir, dest_folder)
 
    end
+
  end
 end
 
