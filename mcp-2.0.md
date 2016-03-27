@@ -5,6 +5,7 @@ permalink: mcp-2.0.html
 ---
 
 {% include mcp-2.0.md  %}
+{% include install.md  %}
 
 <!-- 
   - can use yaml to encode the entries in public 

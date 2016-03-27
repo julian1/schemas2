@@ -5,5 +5,5 @@ permalink: index.html
 ---
 
 {% include mcp-2.0.md  %}
-
+{% include install.md  %}
 
