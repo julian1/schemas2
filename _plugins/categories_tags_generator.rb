@@ -22,29 +22,20 @@ module Jekyll
 #    Dir.glob(Dir.pwd + '/_posts/*.*').each do |f|
 
 
-    mcpDir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
+    mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
     dest_folder = Dir.pwd + '/public/download/'
 
-    Dir.glob( [ mcpDir + '/schema.xsd', mcpDir + '/schema/extensions/*.*' ]).each do |f|
+    Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ]).each do |f|
       puts f
       FileUtils.cp(f, dest_folder) 
     end
 
-#    Dir.glob( mcpDir  + '/schema/extensions/*.*').each do |f|
-#      puts f
-#      FileUtils.cp(f, dest_folder) 
-#    end
-
-
 # So we want to copy them into posts. 
 # But probably not with current dir structure
 # and create a zip
-
-
 #      site.posts.each  do |i|
 #          puts "*** WHOOT Creating tag page for: " + i[0]
 #       end
-
 #       if regenerate_flag
 #           FileUtils.touch Dir.pwd+'/_config.yml'
 #       end
