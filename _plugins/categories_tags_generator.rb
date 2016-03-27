@@ -23,14 +23,17 @@ module Jekyll
 
 
     mcpDir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
+    dest_folder = Dir.pwd + '/public/download/'
 
-    Dir.glob( mcpDir  + '/schema.xsd').each do |f|
+    Dir.glob( [ mcpDir + '/schema.xsd', mcpDir + '/schema/extensions/*.*' ]).each do |f|
       puts f
+      FileUtils.cp(f, dest_folder) 
     end
 
-    Dir.glob( mcpDir  + '/schema/extensions/*.*').each do |f|
-      puts f
-    end
+#    Dir.glob( mcpDir  + '/schema/extensions/*.*').each do |f|
+#      puts f
+#      FileUtils.cp(f, dest_folder) 
+#    end
 
 
 # So we want to copy them into posts. 
