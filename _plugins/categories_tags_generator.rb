@@ -12,14 +12,13 @@ module Jekyll
 
 
 
-    def createZip(path, files)
+    def createZip(zipfile_name, input_filenames)
 
       puts "WHOOT creating Zip! "
 
-      folder = "Users/me/Desktop/stuff_to_zip"
-      input_filenames = ['image.jpg', 'description.txt', 'stats.csv']
-
-      zipfile_name = "/Users/me/Desktop/archive.zip"
+#      folder = "Users/me/Desktop/stuff_to_zip"
+#      input_filenames = ['image.jpg', 'description.txt', 'stats.csv']
+#      zipfile_name = "/Users/me/Desktop/archive.zip"
 
       #Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
       Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
@@ -27,7 +26,7 @@ module Jekyll
           # Two arguments:
           # - The name of the file as it will appear in the archive
           # - The original file, including the path to find it
-          zipfile.add(filename, folder + '/' + filename)
+          zipfile.add('x' + filename,  filename)
         end
       end
     end
@@ -55,7 +54,9 @@ module Jekyll
 
       regenerate_flag = false
 
-      Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ]).each do |f|
+      files = Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ])
+
+      files.each do |f|
 
         # preserve nested file structure
         relative =  Pathname.new(f).relative_path_from(Pathname.new(mcp_dir))
@@ -83,7 +84,7 @@ module Jekyll
       if regenerate_flag
         FileUtils.touch Dir.pwd+'/_config.yml'
 
-        createZip( Dir.pwd + '/my.zip', Dir.glob( '/mcp-1.4' ) )
+        createZip( Dir.pwd + '/my.zip', files )
       end
 
 
