@@ -11,7 +11,7 @@ permalink:  mcp-1.4.html
 
 <!-- No terms? -->
 
-Zipped MCP xsds [here](/public/download/mcp-1.4/zipped.zip). 
+Zipped MCP xsds [here](/mcp-1.4.zip). 
 
 To use:
 

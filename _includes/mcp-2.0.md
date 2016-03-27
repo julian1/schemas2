@@ -8,6 +8,6 @@
 [The MCP code lists (extended ISO19139 codelists)](/mcp-2.0/schema/extensions/mcpDwcTerms.xsd)  
 
 
-Zipped MCP xsds [here](/public/download/mcp-2.0/zipped.zip). 
+Zipped MCP xsds [here](/mcp-2.0.zip). 
 
 

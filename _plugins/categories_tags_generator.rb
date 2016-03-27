@@ -2,8 +2,8 @@
 # http://geoexamples.com/other/2015/06/04/Jekyll-tags-plugin-gh-pages.html
 
 # Could just symbolic link rather than this hardlinking. Issue is that it exposes all the other files in mcp-2.0/schemas.
-# or just symlink the entire directories once and reference
-# Only really need the script for generating the zip which cannot be done...
+# or just symlink the specific files
+# script is only really needed for generating the zip
 
 require 'zip'
 
@@ -11,7 +11,8 @@ module Jekyll
   class TagsGenerator < Generator
 
 
-    def do_copying(mcp_dir, dest_folder)
+    def do_copying(mcp_dir, dest_folder, zipfile_name)
+      # copies files and creates a zip
 
       regenerate_flag = false
 
@@ -47,11 +48,12 @@ module Jekyll
         # trigger regeneration
         FileUtils.touch Dir.pwd+'/_config.yml'
 
-        # create zip
-        zipfile_name = Dir.pwd + '/my.zip'
-
         # cleanest way to empty the zip
-        FileUtils.rm(zipfile_name)
+        if File.exists?(zipfile_name)
+          FileUtils.rm(zipfile_name)
+        end
+
+        # do zipping
         Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
           mappings.each do |mapping|
             # Two arguments:
@@ -60,7 +62,6 @@ module Jekyll
             zipfile.add(mapping[:dst], mapping[:src])
           end
         end
-
       end
 
     end
@@ -68,17 +69,8 @@ module Jekyll
 
     def generate(site)
       puts "current dir #{ Dir.pwd }"
-
-      mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
-      dest_folder = Dir.pwd + '/mcp-2.0/'
-      do_copying(mcp_dir, dest_folder)
-
-      mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-1.4/'
-      dest_folder = Dir.pwd + '/mcp-1.4/'
-      do_copying(mcp_dir, dest_folder)
-
-
-
+      do_copying(Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/', Dir.pwd + '/mcp-2.0/', 'mcp-2.0.zip')
+      do_copying(Dir.pwd + '/schema-plugins/iso19139.mcp-1.4/', Dir.pwd + '/mcp-1.4/', 'mcp-1.4.zip')
     end
 
   end
