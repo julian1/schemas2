@@ -19,7 +19,10 @@ permalink:  mcp-2.0.html
 
 [The MCP extensions](/public/download/mcpExtensions.xsd)
 
-[The MCP code lists (extended ISO19139 codelists)](/public/download/mcpDwcTerms.xsd)
+[The MCP code lists (extended ISO19139 codelists)](/public/download/mcpDwcTerms.xsd)  
+
+
+Zipped MCP xsds [here](/public/download/zipped.zip). 
 
 To use:
 
