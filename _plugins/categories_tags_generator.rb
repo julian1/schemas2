@@ -13,12 +13,16 @@ module Jekyll
 
 
     def createZip(path, files)
+
+      puts "WHOOT creating Zip! "
+
       folder = "Users/me/Desktop/stuff_to_zip"
       input_filenames = ['image.jpg', 'description.txt', 'stats.csv']
 
       zipfile_name = "/Users/me/Desktop/archive.zip"
 
-      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+      #Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+      Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
         input_filenames.each do |filename|
           # Two arguments:
           # - The name of the file as it will appear in the archive
