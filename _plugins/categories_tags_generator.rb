@@ -34,25 +34,6 @@ module Jekyll
       end
     end
 
-    def createZip___OLD(path, files)
-
-      puts "WHOOT creating Zip! "
-      Zip::ZipFile.open(path, Zip::ZipFile::CREATE) do |z|
-        files.each do |file|
-          puts "adding #{file} to zip"
-
-          source_path = "#{Rails.root}/public/webui/#{file}"
-          expand_dirs(file).each do |dir|
-            begin
-              z.mkdir dir
-            rescue Errno::EEXIST
-            end
-          end
-          z.add file, source_path
-        end
-      end
-    end
-
     
 
     def do_copying(mcp_dir, dest_folder)
@@ -60,34 +41,32 @@ module Jekyll
       regenerate_flag = false
 
       files = Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ])
-     
-      puts "here1" 
-      relative_paths = [] 
-      puts "here2" 
-
+    
+      # work out relative paths and store
+      mappings = [] 
       files.each do |f|
         # preserve nested file structure
         relative =  Pathname.new(f).relative_path_from(Pathname.new(mcp_dir))
-        relative_paths << { src: f, dst: relative.to_s }
+        mappings << { src: f, dst: relative.to_s }
       end
 
       puts "here3" 
-      puts relative_paths
+      puts mappings
 
-      relative_paths.each do |relative|
-        i = dest_folder + '/' + relative
+      mappings.each do |mapping|
+        dst = dest_folder + '/' + mapping[:dst]
 
-        puts "file src #{ f }"
-        puts "file dst #{ i }"
+        puts "file src #{ mapping[:src] }"
+        puts "file dst #{ dst }"
 
-        dir = File.dirname i
+        dir = File.dirname dst 
         if !Dir.exists?(dir)
           puts "Creating dest dir #{dir}"
           FileUtils.mkdir_p(dir)
         end
 
-        if !File.exists?(i)
-          FileUtils.cp_r(f, i) 
+        if !File.exists?(dst)
+          FileUtils.cp_r(mapping[:src], dst) 
           regenerate_flag = true
         end
       end
@@ -96,7 +75,17 @@ module Jekyll
       if regenerate_flag
         FileUtils.touch Dir.pwd+'/_config.yml'
 
-        #createZip( Dir.pwd + '/my.zip', files )
+        zipfile_name = Dir.pwd + '/my.zip'
+
+        Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
+          mappings.each do |mapping|
+            # Two arguments:
+            # - The name of the file as it will appear in the archive
+            # - The original file, including the path to find it
+            zipfile.add(mapping[:dst], mapping[:src])
+          end
+        end
+
       end
 
 
