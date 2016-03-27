@@ -13,7 +13,6 @@ module Jekyll
 
       regenerate_flag = false
 
-
       Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ]).each do |f|
 
         # preserve nested file structure

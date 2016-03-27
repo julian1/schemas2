@@ -18,11 +18,11 @@ whoot: /public/download/mcp-2.0/
 
 <!-- use a variable to clean up the paths ? -->
 
-[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/public/download/mcp-2.0/mcpExtensions.xsd)
+[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/mcp-2.0/schema.xsd)
 
-[The MCP extensions](/public/download/mcp-2.0/mcpExtensions.xsd)
+[The MCP extensions](/mcp-2.0/schema/extensions/mcpExtensions.xsd)
 
-[The MCP code lists (extended ISO19139 codelists)](/public/download/mcp-2.0/mcpDwcTerms.xsd)  
+[The MCP code lists (extended ISO19139 codelists)](/mcp-2.0/schema/extensions/mcpDwcTerms.xsd)  
 
 
 Zipped MCP xsds [here](/public/download/mcp-2.0/zipped.zip). 

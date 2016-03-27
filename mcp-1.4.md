@@ -5,9 +5,9 @@ permalink:  mcp-1.4.html
 ---
 
 
-[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/public/download/mcp-1.4/mcpExtensions.xsd)
+[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/mcp-1.4/schema.xsd)
 
-[The MCP extensions](/public/download/mcp-1.4/mcpExtensions.xsd)
+[The MCP extensions](/mcp-1.4/schema/extensions/mcpExtensions.xsd)
 
 <!-- No terms? -->
 
