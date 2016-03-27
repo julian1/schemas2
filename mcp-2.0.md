@@ -27,6 +27,7 @@ whoot: /public/download/mcp-2.0/
 
 Zipped MCP xsds [here](/public/download/mcp-2.0/zipped.zip). 
 
+<!-- Could factor usage into a _layout template -->
 To use:
 
   - Download the Zipped MCP xsds from the link above and unzip it into a new directory - you should then have a schema subdirectory and a file called schema.xsd
