@@ -18,7 +18,12 @@ module Jekyll
 
 
     mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
-    dest_folder = Dir.pwd + '/public/download/'
+    dest_folder = Dir.pwd + '/public/download/mcp-2.0/'
+
+    if !Dir.exists?(dest_folder)
+      puts "Creating dir #{dest_folder}"
+      Dir.mkdir(dest_folder)
+    end
 
     Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ]).each do |f|
  
@@ -27,7 +32,7 @@ module Jekyll
       # don't understand this... code looks wrong...
       puts "file #{ i }"
       if !File.exists?(dest_folder + '/' + i)
-        puts "copying #{ f}"
+        puts "copying #{ f} -> #{dest_folder}"
         FileUtils.cp(f, dest_folder) 
         regenerate_flag = true
       end

@@ -2,6 +2,7 @@
 title: Marine Community Profile Schemas - Version 2.0 - Official
 layout: about
 permalink:  mcp-2.0.html
+whoot: /public/download/mcp-2.0/
 ---
 
 <!-- 
@@ -15,14 +16,16 @@ permalink:  mcp-2.0.html
 
 <!-- think we want hard-coded links in order to control ordering -->
 
-[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/public/download/mcpExtensions.xsd)
+<!-- use a variable to clean up the paths ? -->
 
-[The MCP extensions](/public/download/mcpExtensions.xsd)
+[A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/public/download/mcp-2.0/mcpExtensions.xsd)
 
-[The MCP code lists (extended ISO19139 codelists)](/public/download/mcpDwcTerms.xsd)  
+[The MCP extensions](/public/download/mcp-2.0/mcpExtensions.xsd)
+
+[The MCP code lists (extended ISO19139 codelists)](/public/download/mcp-2.0/mcpDwcTerms.xsd)  
 
 
-Zipped MCP xsds [here](/public/download/zipped.zip). 
+Zipped MCP xsds [here](/public/download/mcp-2.0/zipped.zip). 
 
 To use:
 
