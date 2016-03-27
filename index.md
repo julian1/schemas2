@@ -1,22 +1,12 @@
 ---
 title: Marine Community Profile Schemas - Version 2.0 - Official
 layout: about
-permalink: mcp-2.0.html
-whoot: /public/download/mcp-2.0/
+permalink: index.html
 ---
-
-<!-- 
-  - can use yaml to encode the entries in public 
-  - or even just extract with pattern matching on static content
-  - Could symbolically link into the public dir? - linking exposes the entire subdirectory...
-
-  - perhaps browse geonetwork plugins...
-  - note that it's regenerating constantly...
+<!--
+  This is the same as mcp-2.0 except for the name.
+  Need to templatize and drive with data
 -->
-
-<!-- think we want hard-coded links in order to control ordering -->
-
-<!-- use a variable to clean up the paths ? -->
 
 [A schema.xsd file you can use to bundle the mcp extensions with ISO19139 and ISO19119](/public/download/mcp-2.0/mcpExtensions.xsd)
 
