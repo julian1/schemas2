@@ -26,6 +26,9 @@ module Jekyll
           # Two arguments:
           # - The name of the file as it will appear in the archive
           # - The original file, including the path to find it
+
+          # so we want the relative paths...
+
           zipfile.add('x' + filename,  filename)
         end
       end
@@ -50,31 +53,40 @@ module Jekyll
       end
     end
 
+    
+
     def do_copying(mcp_dir, dest_folder)
 
       regenerate_flag = false
 
       files = Dir.glob( [ mcp_dir + '/schema.xsd', mcp_dir + '/schema/extensions/*.*' ])
+     
+      puts "here1" 
+      relative_paths = [] 
+      puts "here2" 
 
       files.each do |f|
-
         # preserve nested file structure
         relative =  Pathname.new(f).relative_path_from(Pathname.new(mcp_dir))
-        i = dest_folder + '/' + relative.to_s
+        relative_paths << { src: f, dst: relative.to_s }
+      end
 
-        # we don't want the basename but the subtraction  
-        #i = File.basename f
+      puts "here3" 
+      puts relative_paths
+
+      relative_paths.each do |relative|
+        i = dest_folder + '/' + relative
+
         puts "file src #{ f }"
         puts "file dst #{ i }"
 
-        x = File.dirname i
-
-        if !Dir.exists?(x)
-          puts "Creating dest dir #{x}"
-          FileUtils.mkdir_p(x)
+        dir = File.dirname i
+        if !Dir.exists?(dir)
+          puts "Creating dest dir #{dir}"
+          FileUtils.mkdir_p(dir)
         end
 
-        if !File.exists?( i)
+        if !File.exists?(i)
           FileUtils.cp_r(f, i) 
           regenerate_flag = true
         end
@@ -84,7 +96,7 @@ module Jekyll
       if regenerate_flag
         FileUtils.touch Dir.pwd+'/_config.yml'
 
-        createZip( Dir.pwd + '/my.zip', files )
+        #createZip( Dir.pwd + '/my.zip', files )
       end
 
 
