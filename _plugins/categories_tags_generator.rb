@@ -77,6 +77,9 @@ module Jekyll
 
         zipfile_name = Dir.pwd + '/my.zip'
 
+        # cleanest way to empty the zip
+        FileUtils.rm(zipfile_name)
+
         Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
           mappings.each do |mapping|
             # Two arguments:
