@@ -1,7 +1,7 @@
 ---
 title: Marine Community Profile Schemas - Version 2.0 - Official
 layout: about
-permalink: index.html
+permalink:  mcp-2.0.html
 ---
 
 <!-- 
