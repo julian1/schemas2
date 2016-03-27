@@ -1,0 +1,4 @@
+[submodule "schema-plugins"]
+	path = schema-plugins
+	url = git@github.com:aodn/schema-plugins
+	branch = master

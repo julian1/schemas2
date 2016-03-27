@@ -17,14 +17,30 @@ module Jekyll
 
     puts "current dir #{ Dir.pwd }"
 
-    Dir.glob(Dir.pwd + '/_posts/*.*').each do |f|
+#schema-plugins/iso19139.mcp-2.0/
+
+#    Dir.glob(Dir.pwd + '/_posts/*.*').each do |f|
+
+
+    mcpDir = Dir.pwd + '/schema-plugins/iso19139.mcp-2.0/'
+
+    Dir.glob( mcpDir  + '/schema.xsd').each do |f|
       puts f
     end
 
-      site.posts.each  do |i|
+    Dir.glob( mcpDir  + '/schema/extensions/*.*').each do |f|
+      puts f
+    end
 
-          puts "*** WHOOT Creating tag page for: " + i[0]
-       end
+
+# So we want to copy them into posts. 
+# But probably not with current dir structure
+# and create a zip
+
+
+#      site.posts.each  do |i|
+#          puts "*** WHOOT Creating tag page for: " + i[0]
+#       end
 
 #       if regenerate_flag
 #           FileUtils.touch Dir.pwd+'/_config.yml'
