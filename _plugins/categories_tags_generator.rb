@@ -5,9 +5,47 @@
 # or just symlink the entire directories once and reference
 # Only really need the script for generating the zip which cannot be done... 
 
+require 'zip'
 
 module Jekyll
   class TagsGenerator < Generator
+
+
+
+    def createZip(path, files)
+      folder = "Users/me/Desktop/stuff_to_zip"
+      input_filenames = ['image.jpg', 'description.txt', 'stats.csv']
+
+      zipfile_name = "/Users/me/Desktop/archive.zip"
+
+      Zip::ZipFile.open(zipfile_name, Zip::ZipFile::CREATE) do |zipfile|
+        input_filenames.each do |filename|
+          # Two arguments:
+          # - The name of the file as it will appear in the archive
+          # - The original file, including the path to find it
+          zipfile.add(filename, folder + '/' + filename)
+        end
+      end
+    end
+
+    def createZip___OLD(path, files)
+
+      puts "WHOOT creating Zip! "
+      Zip::ZipFile.open(path, Zip::ZipFile::CREATE) do |z|
+        files.each do |file|
+          puts "adding #{file} to zip"
+
+          source_path = "#{Rails.root}/public/webui/#{file}"
+          expand_dirs(file).each do |dir|
+            begin
+              z.mkdir dir
+            rescue Errno::EEXIST
+            end
+          end
+          z.add file, source_path
+        end
+      end
+    end
 
     def do_copying(mcp_dir, dest_folder)
 
@@ -36,10 +74,15 @@ module Jekyll
           regenerate_flag = true
         end
       end
+
       # trigger regeneration
       if regenerate_flag
         FileUtils.touch Dir.pwd+'/_config.yml'
+
+        createZip( Dir.pwd + '/my.zip', Dir.glob( '/mcp-1.4' ) )
       end
+
+
     end
 
     def generate_empty(site)
@@ -56,6 +99,9 @@ module Jekyll
       mcp_dir = Dir.pwd + '/schema-plugins/iso19139.mcp-1.4/'
       dest_folder = Dir.pwd + '/mcp-1.4/'
       do_copying(mcp_dir, dest_folder)
+
+    
+
     end
 
   end
